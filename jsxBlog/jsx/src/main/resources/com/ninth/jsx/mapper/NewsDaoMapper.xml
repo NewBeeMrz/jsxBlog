@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ninth.jsx.dao.NewsDao">
+    <select id="getNewsList" resultType="News">
+        select news.*,category.name from news,category
+        <where>
+            news.c_id = category.id
+        </where>
+        order by news.reads desc
+        limit #{start},#{rows}
+    </select>
+
+    <select id="getNewsListCount" resultType="Integer">
+        select count(*) from news
+    </select>
+
+</mapper>

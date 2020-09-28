@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ninth.jsx.dao.UserDao">
+    <select id="login" parameterType="User" resultType="User">
+        select *from users where user_name = #{user_name} and password = #{password}
+    </select>
+
+    <insert id="register" parameterType="User">
+        insert into users(user_name,password,email,create_date,user_rank,status,belike) values (#{user_name},#{password},#{email},#{create_date},#{user_rank},#{status},#{belike})
+    </insert>
+
+    <select id="isExistUser" parameterType="String" resultType="User">
+        select * from users where user_name= #{user_name}
+    </select>
+
+    <select id="getUserListCount" resultType="int">
+        select count(*) from users,userinfo
+        <where>
+            users.u_id = userinfo.user_id
+        </where>
+    </select>
+
+    <select id="getUserList" parameterType="User" resultType="User">
+        select * from users,userinfo
+        <where>
+            users.u_id = userinfo.user_id
+        </where>
+        limit #{start},#{rows}
+    </select>
+
+    <select id="getUserInfoById" resultType="Map">
+         select * from users,userinfo where users.u_id = userinfo.user_id and users.u_id = #{u_id}
+    </select>
+
+    <insert id="createUserInfo" parameterType="Integer">
+        insert into userinfo(user_id) values (#{u_id})
+    </insert>
+</mapper>

@@ -1,0 +1,38 @@
+server:
+  servlet:
+    context-path: /jsx
+
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+  application:
+    name: jsx
+  datasource:
+    name: jsx
+    url: jdbc:mysql://localhost:3306/jsx?characterEncoding=UTF-8&serverTimezone=GMT&useSSL=false
+    username: root
+    password: root
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver #  注册驱动
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+
+
+
+mybatis:
+  mapper-locations: classpath:com/ninth/jsx/mapper/*.xml #mapper文件位置
+  type-aliases-package: com.ninth.jsx.entity #别名创建
